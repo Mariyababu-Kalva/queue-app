@@ -179,7 +179,7 @@ export default function TrackToken() {
 
                    <div style={{...styles.alertBox, borderLeft: `4px solid ${getTheme().color}`}}>
                       {isServing 
-                        ? "🚨 Your number has been called! Please go to Counter 01." 
+                        ? "🚨 Your token has been called! Please go to Counter 01." 
                         : "Please keep this page open for live updates."}
                    </div>
                 </div>
