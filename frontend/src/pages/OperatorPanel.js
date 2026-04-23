@@ -52,7 +52,7 @@ export default function OperatorPanel() {
       if (data.message === "Queue Empty") {
         showToast("The queue is currently empty!", "error");
       } else {
-        showToast(`Now calling ${data.current}`, "success");
+        showToast(`Now calling ${data.current} token`, "success");
       }
       await refreshStatus();
     } catch (e) {
@@ -173,7 +173,7 @@ export default function OperatorPanel() {
         <div style={styles.mainPanel}>
           <header style={styles.header}>
             <div>
-              <h1 style={styles.mainTitle}>Service Station Alpha</h1>
+              <h1 style={styles.mainTitle}>Operator Desk</h1>
               <div style={styles.statusBadge}>
                 <div style={styles.pulseDot}></div>
                 <span>Live Connection Active</span>
@@ -202,15 +202,15 @@ export default function OperatorPanel() {
             {/* Right: Actions */}
             <div style={styles.actionSection}>
                 <button className="btn-hover" style={styles.btnNext} onClick={nextToken} disabled={loading}>
-                  {loading ? "Syncing..." : "Call Next Customer"}
+                  {loading ? "Syncing..." : "Call Next Token"}
                 </button>
                 
                 <div style={styles.subActionGrid}>
                     <button className="btn-hover" style={styles.btnIssue} onClick={generateToken}>
-                        Issue New Ticket
+                        Issue New Token
                     </button>
                     <button className="btn-hover" style={styles.btnUndo} onClick={handleUndo}>
-                        Undo Last
+                        Undo Last Token
                     </button>
                 </div>
 
@@ -238,7 +238,7 @@ export default function OperatorPanel() {
                 <div key={i} style={{ ...styles.listItem, borderLeft: `5px solid ${style.color}` }}>
                   <div>
                     <div style={styles.listToken}>{t.id}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#94A3B8', fontWeight: 600 }}>TICKET</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94A3B8', fontWeight: 600 }}>TOKEN</div>
                   </div>
                   <span style={{...styles.statusTag, color: style.color, backgroundColor: style.bg}}>{style.label}</span>
                 </div>
@@ -283,9 +283,9 @@ const styles = {
 
   actionSection: { display: 'flex', flexDirection: 'column', gap: '20px' },
   btnNext: { width: '100%', padding: '24px', fontSize: '1.25rem', fontWeight: '800', backgroundColor: '#0F172A', color: 'white', border: 'none' },
-  subActionGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px' },
-  btnIssue: { padding: '20px', background: 'white', border: '2px solid #F1F5F9', fontWeight: '700', color: '#1E293B' },
-  btnUndo: { padding: '20px', background: '#FEF2F2', border: 'none', fontWeight: '700', color: '#EF4444' },
+  subActionGrid: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', width:'100%' },
+  btnIssue: { flex: 1, padding: "18px", borderRadius: "16px", fontSize: "1rem", fontWeight: "700", cursor: "pointer", border: "2px solid #E2E8F0", backgroundColor: "#FFFFFF", color: "#0F172A", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05)", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" },
+  btnUndo: { flex: 1, padding: "18px", borderRadius: "16px", fontSize: "1rem", fontWeight: "700", cursor: "pointer", border: "none", backgroundColor: "#FEF2F2", color: "#EF4444", boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.05)" },
 
   statsContainer: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginTop: 'auto' },
   statBox: { padding: '30px', backgroundColor: '#F8FAFC', borderRadius: '24px', textAlign: 'center', border: '1px solid #F1F5F9' },
