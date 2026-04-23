@@ -25,16 +25,33 @@ export default function OperatorPanel() {
     setModal({ show: false, title: "", message: "", onConfirm: null });
   };
 
+  const manualSync = async () => {
+    const data = await refreshStatus();
+    if (!data) {
+      showToast("Server Connection Failed", "error");
+      return;
+    }
+    // Check if there is actually any data in the system
+    const isEmpty = (data.all_tokens?.length === 0 && !data.current);
+    if (isEmpty) {
+      showToast("System is currently empty", "info");
+    } else {
+      showToast("Status Updated", "success");
+    }
+  };
+
   const refreshStatus = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/admin/status");
+      const res = await fetch("http://localhost:8000/api/admin/status");
       const data = await res.json();
       setAllTokens(data.all_tokens || []);
       setCurrent(data.current);
       setTotalIssued(data.total);
       setWaitingCount(data.waiting_count);
+      return data;
     } catch (err) {
       console.error("Sync error:", err);
+      return null;
     }
   };
 
@@ -180,7 +197,7 @@ export default function OperatorPanel() {
               </div>
             </div>
             <div style={{ display: 'flex', gap: '10px' }}>
-                <button onClick={refreshStatus} className="btn-hover" style={styles.refreshBtn}>↻ Sync</button>
+                <button onClick={manualSync} className="btn-hover" style={styles.refreshBtn}>↻ Sync</button>
                 <button onClick={resetSystem} disabled={isSystemFresh} className="btn-hover" style={styles.dangerTextBtn}>Reset System</button>
             </div>
           </header>
@@ -207,10 +224,10 @@ export default function OperatorPanel() {
                 
                 <div style={styles.subActionGrid}>
                     <button className="btn-hover" style={styles.btnIssue} onClick={generateToken}>
-                        Issue New Token
+                        <span>➕</span> Issue New
                     </button>
                     <button className="btn-hover" style={styles.btnUndo} onClick={handleUndo}>
-                        Undo Last Token
+                        <span>↩️</span> Undo Last
                     </button>
                 </div>
 
