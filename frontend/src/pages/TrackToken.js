@@ -133,7 +133,7 @@ export default function TrackToken() {
               <div style={styles.idleState}>
                  <div style={styles.idleIcon}>🛋️</div>
                  <h3>Welcome</h3>
-                 <p>Enter your ticket number to see live progress.</p>
+                 <p>Enter your token number to see live progress.</p>
               </div>
             ) : error ? (
               <div style={styles.errorState}>
@@ -145,7 +145,7 @@ export default function TrackToken() {
               <div style={styles.trackerGrid}>
                 {/* BIG TOKEN PLATE */}
                 <div style={{...styles.plate, background: getTheme().gradient}}>
-                   <span style={styles.plateSub}>YOUR TICKET</span>
+                   <span style={styles.plateSub}>YOUR TOKEN</span>
                    <h1 style={styles.plateMain}>{data.token}</h1>
                    <div style={styles.statusPill}>
                       {getTheme().icon} {getTheme().label}
